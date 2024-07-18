@@ -1,7 +1,3 @@
-//
-// Created by Niu Yudong on 2023/3/8.
-//
-
 #ifndef HIN
 #define HIN
 
