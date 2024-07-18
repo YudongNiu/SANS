@@ -476,29 +476,6 @@ namespace jsy {  //join-synopses
         return false;
     }
 
-    // NIU YUDONG: not finished
-    //bool triangle_remove(unsigned int node, std::vector<Synopse>* synopses,
-    //                     std::vector<std::vector<unsigned int> *>* ractive,
-    //                     std::vector<bool>* qualified_nodes,
-    //                     std::vector<std::unordered_map<unsigned int, std::vector<unsigned int>*>*>* reverse_synopses,
-    //                     std::unordered_map<unsigned int, bool>* updated_nodes){
-    //    for(unsigned int l=0;l < L;l++){
-    //        unsigned int r = synopses->at(ractive->at(0)->at(node)-1).rs[l];
-    //        for(unsigned int pos: *reverse_synopses->at(l)->at(node)){
-    //            if(qualified_nodes->at(synopses->at(pos).p)){
-    //                int j = 0;
-    //                for(;j<synopses->at(pos).sizes[l];j++) if(synopses->at(pos).minks[l * K + j] == r) break;
-    //                synopses->at(pos).minks[l * K + j] = synopses->at(pos).minks[l * K + synopses->at(pos).sizes[l] - 1];
-    //                synopses->at(pos).minks[l * K + synopses->at(pos).sizes[l] - 1] = 0;
-    //                synopses->at(pos).sizes[l] -= 1;
-    //                if(synopses->at(pos).sizes[l] < Kmin && synopses->at(pos).overflows[l]) return true;
-    //
-    //            }
-    //        }
-    //    }
-    //    return false;
-    //}
-
     std::map<unsigned int, double>* synopses_fp_deg(unsigned int meta_layer, std::vector<HiddenEdge> *hidden_edges,
                                                 std::vector<std::vector<Synopse> *>* synopses, double q_deg,
                                                 double topr, unsigned int peer_size,
@@ -625,63 +602,6 @@ namespace jsy {  //join-synopses
         for (unsigned int l = 0; l <= meta_layer; l++) for (auto &i : *synopses->at(l)) clear(&i, true);
         return degs;
     }
-
-//    std::vector<std::unordered_map<unsigned int, unsigned int>*>* gnn_synopses_bipartite(unsigned int meta_layer,
-//                                                                    std::vector<HiddenEdge> *hidden_edges,
-//                                                                    std::vector<std::vector<Synopse> *>* synopses){
-//        std::random_device dev;
-//        std::mt19937 generator(dev());
-//        std::uniform_int_distribution<std::mt19937::result_type> distribute(1, RAND_MAX);
-//
-//        auto rand2ps = new std::vector<std::unordered_map<unsigned int, unsigned int>*>();
-//        for(unsigned int l=0;l<L;l++) rand2ps->push_back(new std::unordered_map<unsigned int, unsigned int>());
-//
-//        int meta_layer_count = -1;
-//        for(unsigned int ec = 0;ec<hidden_edges->size();ec++){
-//            unsigned int p = hidden_edges->at(ec).s;
-//            unsigned int nbr = hidden_edges->at(ec).t;
-//            unsigned int l = hidden_edges->at(ec).l;
-//            if(l==0 && synopses->at(0)->at(p).sizes[0] == 0){
-//                unsigned int n = synopses->at(0)->at(p).p;
-//                for(unsigned int ll = 0; ll <L ; ll++){
-//                    int rand = distribute(generator);
-//                    while(rand2ps->at(ll)->count(rand) > 0) rand = distribute(generator);
-//                    synopses->at(0)->at(p).minks[ll * K] = (unsigned int) rand;
-//                    synopses->at(0)->at(p).sizes[ll] = 1;
-//                    rand2ps->at(ll)->at(rand) = n;
-//                    synopses->at(0)->at(p).rs[ll] = (unsigned int)rand;
-//                }
-//            }
-//            if(l >= meta_layer){
-//                meta_layer_count = ec - 1;
-//                break;
-//            }
-//            add(&synopses->at(l+1)->at(nbr), &synopses->at(l)->at(p));
-//        }
-//
-//        if(meta_layer_count < 0) meta_layer_count = hidden_edges->size()-1;
-//
-//        for(unsigned int l=0;l<meta_layer;l++) for(auto &i: *synopses->at(l)) clear(&i, false);
-//
-//        for(int ec = meta_layer_count;ec >= 0;ec--){
-//            unsigned int p = hidden_edges->at((unsigned int) ec).t;
-//            unsigned int nbr = hidden_edges->at((unsigned int) ec).s;
-//            unsigned int l = 1+hidden_edges->at((unsigned int) ec).l;
-//            if(l == meta_layer && synopses->at(meta_layer)->at(p).sizes[0] == 0){
-//                unsigned int n = synopses->at(meta_layer)->at(p).p;
-//                for(unsigned int ll = 0; ll < L;ll++){
-//                    int rand = distribute(generator);
-//                    while(rand2ps->at(ll)->count(rand) > 0) rand = distribute(generator);
-//                    synopses->at(meta_layer)->at(p).minks[ll * K] = (unsigned int) rand;
-//                    synopses->at(meta_layer)->at(p).sizes[ll] = 1;
-//                    rand2ps->at(ll)->at(rand) = n;
-//                    synopses->at(meta_layer)->at(p).rs[ll] = (unsigned int) rand;
-//                }
-//            }
-//            add(&synopses->at(l-1)->at(nbr), &synopses->at(l)->at(p));
-//        }
-//        return rand2ps;
-//    }
 
     std::pair<unsigned int, unsigned int> sub_matching_graph(unsigned int meta_layer,
             std::vector<HiddenEdge>* hidden_edges,
