@@ -9,6 +9,6 @@ int main(int argc, char* argv[]){
     
     if(method == "peele") Effective_hg_DSD(dataset, "edge");
     else if(method == "peelt") Effective_hg_DSD(dataset, "triangle");
-    else if(method == "scanse") Effective_prop_DSD(dataset, "edge");
-    else if(method == "scanst") Effective_prop_DSD(dataset, "triangle");
+    else if(method == "sanse") Effective_prop_DSD(dataset, "edge");
+    else if(method == "sanst") Effective_prop_DSD(dataset, "triangle");
 }
