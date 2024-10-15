@@ -31,7 +31,7 @@ To run the code for densest subgraph discovery queries, execute the following co
 For example, the following command execute the SansE method in each relational graph induced by candidate meta-paths in imdb.
 
 ```sh
-./scans imdb sanse
+./sans imdb sanse
 ```
 
 Input Files
